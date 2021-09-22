@@ -1,4 +1,6 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 interface Props {
   buttonStyle: 'rounded' | 'outline' | 'disabled';
@@ -13,26 +15,19 @@ const outlineButtonClassNames =
 
 const disabledButtonClassNames = 'bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed';
 
-const Button = ({ buttonStyle, type, text = 'Submit', handleClick }: Props) => {
+const ConfirmButton = ({ buttonStyle, type, text = 'Submit', handleClick }: Props) => {
   return (
-    <div className="p-1">
-      <button
-        className={
-          buttonStyle === 'rounded'
-            ? roundedButtonClassNames
-            : buttonStyle === 'outline'
-            ? outlineButtonClassNames
-            : buttonStyle === 'disabled'
-            ? disabledButtonClassNames
-            : undefined
-        }
+    <Box textAlign="center" mb={3} mt={3} >
+      <Button 
+        variant="contained" 
+        color="warning"
         onClick={handleClick}
         type={type}
       >
         {text}
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 
-export default Button;
+export default ConfirmButton;
