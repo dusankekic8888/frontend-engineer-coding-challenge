@@ -14,9 +14,6 @@ interface Props {
   onConfirm?: (type: string, amount: number) => void;
 }
 
-
-
-
 const PrimaryNetwork = (props: Props) => {
   const {
     id,
@@ -52,31 +49,12 @@ const PrimaryNetwork = (props: Props) => {
         <p>Current API: {currentAPY}%</p>
         <p>Amount Deposited: {type === 'deposit' ? amount : 0}</p>
         <p>Amount Interest: {interest}</p>
-        <div className="block">
-        <label className="inline-flex items-center">
-          <input 
-            type="radio"
-            className="form-radio"
-            name={`type-${id}`}
-            value='deposit'
-            checked={type === 'deposit'}
-            onChange={(e) => handlerChangeType(e.target.value)}
-          />
-          <span className="ml-2">Deposit</span>
-        </label>
-        <label className="inline-flex items-center">
-          <input 
-            type="radio"
-            className="form-radio"
-            name={`type-${id}`}
-            value='withdraw'
-            checked={type === 'withdraw'}
-            onChange={(e) => handlerChangeType(e.target.value)}
-          />
-          <span className="ml-2">Withdraw</span>
-        </label>
-        </div>
-      
+        
+        <RadioButton 
+          wrapperClassName="block"
+          id = {`type-${id}`}
+          onChange={(value) => handlerChangeType(value)}
+        />
         <Input 
           label="Amount"
           id={`amount-${id}`}
