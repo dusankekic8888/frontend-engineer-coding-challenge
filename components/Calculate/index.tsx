@@ -40,10 +40,13 @@ const Calculate = (props: Props) => {
   const [interest, setInterest] = useState(0);
   const [isError, setError] = useState(false);
   const [inputValue, setInputValue] = useState(false);
+  const [isSuccess, setSucess]= useState(false);
   const handlerChangeType = (value: string) => {
     setType(value);
+    setSucess(false);
   };
   const onChange = (value: string) => {
+    setSucess(false);
     if (parseFloat(value) > 0) {
       setError(false);
       setAmount(roundAmountHooks(parseFloat(value)));
@@ -62,7 +65,7 @@ const Calculate = (props: Props) => {
       setInterest(0);
     }
   }, [amount, type, dayToProgress]);
-  
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -177,7 +180,10 @@ const Calculate = (props: Props) => {
           text="Confirm"
           buttonStyle="outline"
           type="button"
-          handleClick={() => onConfirm(type, amount + interest)}
+          handleClick={() => {
+            onConfirm(type, amount + interest);
+            setSucess(true);
+          }}
         />
       </CardContent>
       {isError && (
@@ -185,7 +191,7 @@ const Calculate = (props: Props) => {
           Amount must greater than 0
         </Alert>
       )}
-      {depositBalance && inputValue ? (
+      {isSuccess && !isError && !withDrawBalance ? (
         <Alert variant="filled" severity="success">
           success
         </Alert>
