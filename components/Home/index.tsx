@@ -33,20 +33,18 @@ const Home = () => {
 
   const handleConfirm = (props: AmountProps) => {
     if (props.type === "deposit") {
-      if (props.amount != NaN) {
-        setBalance(roundAmountHooks(balance + props.amount));
-        if (balance < balance + props.amount) {
-          setDepositBalance(true);
-        }
+      setBalance(roundAmountHooks(balance + props.amount));
+      if (balance < balance + props.amount) {
+        setDepositBalance(true);
+      } else {
+        setDepositBalance(false);
       }
     } else {
-      if (props.amount != NaN) {
-        if (balance >= props.amount) {
-          setBalance(roundAmountHooks(balance - props.amount));
-          setWithDrawBalance(false);
-        } else {
-          setWithDrawBalance(true);
-        }
+      if (balance >= props.amount) {
+        setBalance(roundAmountHooks(balance - props.amount));
+        setWithDrawBalance(false);
+      } else {
+        setWithDrawBalance(true);
       }
     }
   };
@@ -92,9 +90,8 @@ const Home = () => {
                     onChange={(e) => setDayToProgress(parseInt(e.target.value))}
                     id="day-to-progress"
                     label=""
-                    type="text"
+                    type="number"
                     placeholder="Input Day to Progress"
-                    wrapperClassName=""
                     required={true}
                   />
                 </Typography>
@@ -104,6 +101,8 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Calculate
+            depositBalance={depositBalance}
+            withDrawBalance={withDrawBalance}
             title="Compound"
             id="compound"
             currentAPY={5}
@@ -113,6 +112,8 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Calculate
+            depositBalance={depositBalance}
+            withDrawBalance={withDrawBalance}
             title="Aave"
             id="aave"
             currentAPY={3}
@@ -122,6 +123,8 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Calculate
+            depositBalance={depositBalance}
+            withDrawBalance={withDrawBalance}
             title="Curve"
             id="curve"
             currentAPY={2.5}
@@ -130,16 +133,6 @@ const Home = () => {
           />
         </Grid>
       </Grid>
-      {depositBalance && (
-        <Alert variant="filled" severity="success">
-          success
-        </Alert>
-      )}
-      {withDrawBalance && (
-        <Alert variant="filled" severity="error">
-          Can not withdraw because your balance is low than amount
-        </Alert>
-      )}
     </>
   );
 };
