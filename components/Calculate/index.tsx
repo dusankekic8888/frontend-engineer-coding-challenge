@@ -43,8 +43,6 @@ const Calculate = (props: Props) => {
   const handlerChangeType = (value: string) => {
     setType(value);
   };
-  console.log(withDrawBalance);
-  console.log(withDrawBalance);
   const onChange = (value: string) => {
     if (parseFloat(value) > 0) {
       setError(false);
@@ -64,7 +62,7 @@ const Calculate = (props: Props) => {
       setInterest(0);
     }
   }, [amount, type, dayToProgress]);
-  console.log(amount);
+  
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>

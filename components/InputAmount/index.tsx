@@ -25,7 +25,7 @@ const InputAmount = (props: Props) => {
     onChange,
     ...rest
   } = props;
-  console.log(props.isError);
+  
   return (
     <Box>
       <TextField

@@ -33,6 +33,7 @@ const Home = () => {
 
   const handleConfirm = (props: AmountProps) => {
     if (props.type === "deposit") {
+      setWithDrawBalance(false);
       setBalance(roundAmountHooks(balance + props.amount));
       if (balance < balance + props.amount) {
         setDepositBalance(true);
@@ -42,12 +43,12 @@ const Home = () => {
     } else {
       if (balance >= props.amount) {
         setBalance(roundAmountHooks(balance - props.amount));
-        setWithDrawBalance(false);
-      } else {
+      }else{
         setWithDrawBalance(true);
       }
     }
   };
+  
   return (
     <>
       <Grid container spacing={2} mt={3}>
